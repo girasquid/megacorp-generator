@@ -1,0 +1,104 @@
+<!doctype html>
+<html class="no-js" lang="">
+
+<head>
+  <meta charset="utf-8">
+  <title>Megacorp-Generator</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="stylesheet" href="style.css">
+  <style type="text/css">
+    body {font-family: 'Source Code Pro', consolas,sans-serif;color:#333;font-size:1.3rem;margin:0;}
+  </style>
+</head>
+<body class="mx-3 my-4 text-center">
+  <p>Megacorp-Generator (generating about <em id='permutation-count'></em> unique megacorps)</p>
+
+  <h2 id='corporation-name'></h2>
+
+  <button class="btn btn-success" id="generate-button">generate</button>
+  <label>
+    <input type="checkbox" id="unique-mode">
+    unique mode
+    <span id="unique-mode-counter">(seen <em id="seen-permutations-count"></em> already)</span>
+  </label>
+
+  <script type="text/javascript" src="inputs.js"></script>
+  <script type="text/javascript">
+    document.getElementById("unique-mode").onchange = function() {
+      uniqueModeEnabled = document.getElementById("unique-mode").checked;
+      if(!uniqueModeEnabled) {
+        localStorage.clear();
+        seenCorporations = [corporationName];
+      }
+      updateUI();
+    }
+
+    document.getElementById("generate-button").onclick = function() {
+      let uniqueMode = document.getElementById("unique-mode").checked;
+      do {
+        corporationName = generateCorporation();
+      } while (seenCorporations.indexOf(corporationName) != -1);
+
+      if(uniqueModeEnabled) {
+        seenCorporations.push(corporationName);
+      }
+
+      updateUI();
+    }
+
+    function updateUI() {
+      document.getElementById("seen-permutations-count").innerHTML = seenCorporations.length;
+      document.getElementById("permutation-count").innerHTML = availableVariants.toLocaleString();
+      document.getElementById("corporation-name").innerHTML = corporationName;
+
+      if(!uniqueModeEnabled) {
+        document.getElementById("unique-mode-counter").classList.remove("visible");
+        document.getElementById("unique-mode-counter").classList.add("invisible");
+      } else {
+        document.getElementById("unique-mode-counter").classList.remove("invisible");
+        document.getElementById("unique-mode-counter").classList.add("visible");
+      }
+    }
+
+    function calculateAvailableVariants() {
+      return fronts.length * middles.length * ends.length + fronts.length + (fronts.length * fronts.length);
+    }
+
+    function generateCorporation() {
+      // prefix suffix heavy/medium/light industry
+      // Ulysses systems
+      // Ulysses heavy robotics
+      // Ulysses light biotechnologies
+      // Ulysses light quality manufacturing
+      let nameParts = [];
+      if(Math.random() > 0.5) {
+        if(Math.random() > 0.5) {
+          nameParts = [fronts[Math.floor(Math.random() * fronts.length)]];
+        } else {
+          let firstFront = fronts[Math.floor(Math.random() * fronts.length)];
+          let secondFront = firstFront;
+          do {
+            secondFront = fronts[Math.floor(Math.random() * fronts.length)]
+          } while(firstFront == secondFront);
+          nameParts = [firstFront + "-" + secondFront];
+        }
+      } else {
+        nameParts = [
+          fronts[Math.floor(Math.random() * fronts.length)],
+          middles[Math.floor(Math.random() * middles.length)],
+          ends[Math.floor(Math.random() * ends.length)]
+        ]
+      }
+      return nameParts.join(" ");
+    }
+
+    let corporationName = generateCorporation();
+    let seenCorporations = localStorage.getItem("seenCorporations") || [corporationName];
+    let uniqueModeEnabled = document.getElementById("unique-mode").checked;
+    let availableVariants = calculateAvailableVariants();
+    updateUI();
+  </script>
+</body>
+</html>
