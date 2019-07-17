@@ -5,6 +5,8 @@ Getting started
 open index.html
 ```
 
+Make sure to have [butler](https://itch.io/docs/butler/installing.html) installed if distributing.
+
 ## Datasets
 
 - https://en.wikipedia.org/wiki/List_of_lightvessels
