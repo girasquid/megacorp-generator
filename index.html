@@ -85,11 +85,18 @@
           nameParts = [firstFront + "-" + secondFront];
         }
       } else {
-        nameParts = [
-          fronts[Math.floor(Math.random() * fronts.length)],
-          middles[Math.floor(Math.random() * middles.length)],
-          ends[Math.floor(Math.random() * ends.length)]
-        ]
+        if(Math.random() > 0.5) {
+          nameParts = [
+            fronts[Math.floor(Math.random() * fronts.length)],
+            ends[Math.floor(Math.random() * ends.length)]
+          ];
+        } else {
+          nameParts = [
+            fronts[Math.floor(Math.random() * fronts.length)],
+            middles[Math.floor(Math.random() * middles.length)],
+            ends[Math.floor(Math.random() * ends.length)]
+          ];
+        }
       }
       return nameParts.join(" ");
     }

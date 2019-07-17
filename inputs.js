@@ -72,7 +72,11 @@ const middles = [
   "incoming",
   "cyber",
   "bio",
-  "countermeasure"
+  "countermeasure",
+  "hard",
+  "wet",
+  "wetware",
+  "soft",
 ];
 const ends = [
   "robotics",
@@ -93,4 +97,5 @@ const ends = [
   "petrochem",
   "microtech",
   "micro",
+  "labs",
 ];
