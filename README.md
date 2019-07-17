@@ -1,4 +1,4 @@
-# corporation generator
+# megacorp-generator
 
 Getting started
 ```bash
