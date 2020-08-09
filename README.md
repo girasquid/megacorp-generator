@@ -17,3 +17,7 @@ Make sure to have [butler](https://itch.io/docs/butler/installing.html) installe
 - https://en.wikipedia.org/wiki/List_of_Liberty_ships
 - https://en.wikipedia.org/wiki/List_of_ocean_liners
 - https://en.wikipedia.org/wiki/List_of_gas_carriers
+
+## Credits
+
+- Cover image by [Katie Sheedy](https://katiesheedy.ca/).
